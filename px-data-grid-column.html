@@ -149,11 +149,15 @@
         }
 
         _mappedObjectChanged(obj) {
-          if (obj) {
+          if (obj && !obj.hasOwnProperty('_element')) {
             Object.defineProperty(obj, '_element', {
               value: this,
-              enumerable: false
+              enumerable: false,
+              writable: true
             });
+          }
+          if (obj && obj.hasOwnProperty('_element') && obj._element !== this) {
+            obj._element = this;
           }
         }
 
