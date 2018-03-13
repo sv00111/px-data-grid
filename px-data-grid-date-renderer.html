@@ -234,16 +234,10 @@ Make date-renderer columns use ellipsis overflow:
             this.dataFormat = 'YYYY-MM-DD';
           }
 
-          if (rendererConfig && rendererConfig.value && rendererConfig.value.hasOwnProperty('datePickerDateFormat')) {
-            this.datePickerDateFormat = rendererConfig.value.datePickerDateFormat;
-          } else {
-            this.datePickerDateFormat = 'YYYY-MM-DD';
-          }
-
-          if (rendererConfig && rendererConfig.value && rendererConfig.value.hasOwnProperty('datePickerTimeFormat')) {
-            this.datePickerTimeFormat = rendererConfig.value.datePickerTimeFormat;
-          } else {
-            this.datePickerTimeFormat = 'HH:MM:SS';
+          if (rendererConfig && rendererConfig.value && rendererConfig.value.hasOwnProperty('displayFormat')) {
+            const [date, time] = rendererConfig.value.displayFormat.split(' ');
+            this.datePickerDateFormat = date ? date : 'YYYY-MM-DD';
+            this.datePickerTimeFormat = time ? time : 'HH:MM:SS';
           }
 
         }
