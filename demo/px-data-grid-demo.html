@@ -592,16 +592,17 @@
           format: 'YYYY-MM-DD HH:mm',
           timezone: 'UTC'
         },
-        filterByTime: true,
         renderer: 'px-data-grid-date-renderer',
         rendererConfig: {
           hideTime: false,
           displayFormat: 'MM/DD/YYYY HH:mm',
           timezone: 'America/Los_Angeles',
-          datePickerDateFormat: 'MM/DD/YYYY',
+          showTimeZone: 'abbreviatedText',
+          datePickerDateFormat: 'MM-DD/YYYY',
           datePickerTimeFormat: 'HH:mm'
         },
         editable: true,
+        filterByTime: true,
         type: 'date'
       }
     ];

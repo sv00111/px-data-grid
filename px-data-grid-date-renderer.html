@@ -41,7 +41,7 @@ Make date-renderer columns use ellipsis overflow:
           hide-time="[[hideTime]]"
           hide-date="[[hideDate]]"
           time-zone="[[displayTimezone]]"
-          show-time-zone="abbreviatedText"
+          show-time-zone="[[showTimeZone]]"
           date-format="[[datePickerDateFormat]]"
           time-format="[[datePickerTimeFormat]]"
           hoist>
@@ -92,6 +92,20 @@ Make date-renderer columns use ellipsis overflow:
             timezone: {
               type: String,
               value: 'UTC'
+            },
+            /**
+             * String representing how to show timezones. Valid values
+             * come from the px-datetime-picker component.
+             *
+             * `none`: do not show timezone
+             * `text`: show timezone as non-editable text
+             * `abbreviatedText`: shows abbreviated version of timezone as non-editable text
+             * `dropdown`: show timezone in dropdown that contains common offset values
+             * `extendedDropdown`: show timezone in dropdown and includes all timezones
+             */
+            showTimeZone: {
+              type: String,
+              value: 'none'
             },
             /**
              * Format for px-datepicker's dateFormat
@@ -271,6 +285,11 @@ Make date-renderer columns use ellipsis overflow:
             this.datePickerTimeFormat = 'HH:MM:SS';
           }
 
+          if (rendererConfig && rendererConfig.value && rendererConfig.value.hasOwnProperty('datePickerTimeFormat')) {
+            this.showTimeZone = rendererConfig.value.showTimeZone;
+          } else {
+            this.showTimeZone = 'none';
+          }
         }
       }
 

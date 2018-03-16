@@ -173,13 +173,16 @@
               type: Array
             },
 
-            useTimezones: {
+            _hideTimezone: {
+              type: Boolean
+            },
+
+            _editableTimezone: {
               type: Boolean
             },
 
             _showTimeZone: {
-              type: String,
-              value: 'none'
+              type: String
             },
 
             _mappedColumns: Array,
@@ -289,7 +292,6 @@
             '_momentDatesObserver(_dateFrom, _dateTo, _dateFrom.*, _dateTo.*)',
             // '_entityDatesObserver(entity, entity.dateFrom, entity.dateTo)',
             '_localizeChanged(localize)',
-            '_useTimezonesChanged(useTimezones)',
             '_entityObserver(entity, entity.*)',
             '_columnNumberBoundsObserver(entity, entity.columnId, columns.*)',
             '_setDateRanges(entity, columns, entity.columnId, columns.*)',
@@ -309,10 +311,6 @@
           this._numberConditions.forEach((condition, index) => {
             this.set(`_numberConditions.${index}.val`, localize(condition.val));
           });
-        }
-
-        _useTimezonesChanged(useTimezones) {
-          this._showTimeZone = useTimezones ? 'dropdown' : 'none';
         }
 
         _setDateRanges(entity, columns) {
@@ -359,6 +357,8 @@
             this.set('_displayDateFormat', selectedColumn.rendererConfig.datePickerDateFormat || 'YYYY/MM/DD');
             this.set('_displayTimeFormat', selectedColumn.rendererConfig.datePickerTimeFormat || 'HH:mm');
             this.set('_displayTimezone', selectedColumn.rendererConfig.timezone || 'UTC');
+            // showTimeZone prop uses values from px-datetime-picker's showTimeZone prop
+            this.set('_showTimeZone', selectedColumn.rendererConfig.showTimeZone || 'none');
           }
         }
 
